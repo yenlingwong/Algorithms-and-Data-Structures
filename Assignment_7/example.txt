@@ -1,0 +1,11 @@
+Average running time for Lomoto Quick Sort is 0.0201039.
+Average running time for Hoare Quick Sort is 0.0193747.
+Average running time for Median of Three Quick Sort is 0.018459.
+
+Average running time for Lomoto Quick Sort is 0.0339919.
+Average running time for Hoare Quick Sort is 0.0327217.
+Average running time for Median of Three Quick Sort is 0.0313064.
+
+Average running time for Lomoto Quick Sort is 0.0357736.
+Average running time for Hoare Quick Sort is 0.0341196.
+Average running time for Median of Three Quick Sort is 0.0327088.
