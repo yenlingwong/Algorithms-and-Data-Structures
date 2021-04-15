@@ -59,7 +59,6 @@ bool Stack<T, initialsize>::push(T element) {
     } else {
         return 0;
     }
-    
 }
 
 template <class T, int initialsize>
