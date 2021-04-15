@@ -13,7 +13,7 @@ class Complex {
     private:
         T real, imaginary;
     public:
-        Complex<T>(T real, T imaginary) {
+        Complex(T real, T imaginary) {
             this -> real = real;
             this -> imaginary = imaginary;
         }
@@ -39,7 +39,7 @@ int main() {
     float float_array[4] = {23.44467372f, 239.1f, -5.55555f, 234.0f};
     string string_array[3] = {"alpha", "beta", "gamma"};
     Complex<int> complex_array[3] = {Complex <int> (9,8), Complex <int> (7,6), Complex <int> (5,4)};
-    Complex<double> complex_darray[3] = {Complex <double> (9.3,8.2), Complex <double> (7.241,-6.234), Complex <double> (5.0,-4.242)};
+    Complex<double> complex_darray[3] = {Complex<double>(9.3,8.2), Complex<double>(7.241,-6.234), Complex<double>(5.0,-4.242)};
 
     if ((array_search(char_array, 7 , 'z') == -1)) {
         cout << "The character is not in the array" << endl;
@@ -74,14 +74,16 @@ int main() {
     if (array_search(complex_array, 3, Complex <int>(3,-8))) {
         cout << "The integer Complex is not in the array" << endl;
     } else {
-        cout << "The integer Complex is in position " << array_search(complex_array, 3, Complex <int>(8,0)) << endl;
+        cout << "The integer Complex is in position " << array_search(complex_array, 3, Complex<int>(8,0)) << endl;
     }
     
     if (array_search(complex_darray, 3, Complex <double>(9.3,8.2))) {
         cout << "The double Complex is not in the array" << endl;
     } else {
-        cout << "The double Complex is in position " << array_search(complex_darray, 3, Complex <double>(9.3,8.2)) << endl;
+        cout << "The double Complex is in position " << array_search(complex_darray, 3, Complex<double>(9.3,8.2)) << endl;
     }
 
     return 0;
 }
+
+// TA's Remarks: test case false output -0.05, no comment -0.05 total: 0.9 
