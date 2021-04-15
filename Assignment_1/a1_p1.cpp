@@ -8,7 +8,7 @@ ywong@jacobs-university.de
 #include <iostream>
 using namespace std;
 
-template<typename T>
+template <class T>
 class Complex {
     private:
         T real, imaginary;
