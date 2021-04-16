@@ -6,178 +6,144 @@ ywong@jacobs-university.de
 */
 
 #include <iostream>
-#include <string>
-#include <sstream>
-
 #include "LinkedList.h"
 
 using namespace std;
 
-template <class T>
-Node<T>::Node(T data) {
-    this->data = data;
-    cout << "A Node has been created." << endl;
-}
-
-template <class T>
-Node<T>::~Node() {
-    //
-}
-
-template <class T>
-string Node<T>::toString() {
-    stringstream s;
-    s << this->data;
-    return s.str();
-}
-// Using stringstream to convert value to String
-
-template <class T>
+template <typename T>
 List<T>::List() {
     this->front = NULL;
     this->end = NULL;
     this->list_size = 0;
 
-    cout << "A list has been created." << endl;
+    std::cout << "A List has been created." << std::endl;
 }
 // Default Constructor
 
-template <class T>
-List<T>::List(const List<Node<T>>& list_copy) {
+template <typename T>
+List<T>::List(const List<T>& list_copy) {
     if (list_copy.front == NULL) {
         this->front = NULL;
         this->end = NULL;
         this->list_size = 0;
     } else {
         this->list_size = 0;
-        T* temp = list_copy.end;
-        while(temp->prev != NULL) {
-            this->pushFront(new Node<T>(temp->data));
-            temp = temp->prev;
-            this->list_size++;
+        this->front = NULL;
+        this->end = NULL;
+        struct Node<T>* current = list_copy.front;
+        while (current != NULL) {
+            this->pushFront(current->data);
+            current = current->next;
         }
-        delete[] temp;       
+        std::cout << "A List has been copied." << std::endl;
     }
 }
-// Copy Constructor for List
+// Copy Constructor
 
-template <class T>
-List<T>::List(int size, T* new_node) {
-    cout << "A list has been created" << endl;
-    this->front = NULL;
-    this->end = NULL;
-    this->list_size = 0;
-
-    this->pushFront(new_node);
-    
-    for (int i = 0; i < size; i++) {
-        this->pushFront(new Node<int>(i*i));
-    }
-    // Must manually change type every single time
-    // Since compiler doesn't allow an arbitrary type T
-}
-// Parametric Constructor
-
-
-template <class T>
+template <typename T>
 List<T>::~List() {
-    while (this->front != NULL) {
-        T* temp = this->front;
-        this->front = this->front->next;
-        delete[] temp;
+    while (this->list_size!= 0) {
+        this->popEnd();
     }
-    
-    cout << "A list has been cleared." << endl;
+    std::cout << "The List has been cleared." << std::endl;
 }
 // Destructor
 
-template <class T>
-T* List<T>::getFront() {
-    return this->front;
-}
-// Returning head element without removing
 
-template <class T>
-T* List<T>::getEnd() {
-    return this->end;
+template <typename T>
+T List<T>::getFront() {
+    return this->front->data;
 }
-// Returning tail element without removing
+// Returning data of head element without removing
 
-template <class T>
-void List<T>::pushFront(T* new_node) {
+template <typename T>
+T List<T>::getEnd() {
+    return this->end->data;
+}
+// Returning data of tail element without removing
+
+template <typename T>
+void List<T>::pushFront(T info) {
+    Node<T>* new_node = new struct Node<T>;
+    new_node->data = info;
     new_node->next = NULL;
     new_node->prev = NULL;
 
     if (this->front == NULL) {
         this->front = new_node;
-        this->end = this->front;
+        this->end = new_node;
         this->list_size++;
-        cout << this->getFront()->toString() << " has been pushed to the front." << endl;
+        std::cout << this->getFront() << " has been pushed to the front." << std::endl;
     } else {
         this->front->prev = new_node;
         new_node->next = this->front;
         this->front = new_node;
         this->list_size++;
-        cout << this->getFront()->toString() << " has been pushed to the front." << endl;
-        
+        std::cout << this->getFront() << " has been pushed to the front." << std::endl;
     }
 }
 // Method to add element to the front of the list
 
-template <class T>
-void List<T>::pushEnd(T* new_node) {
-    new_node->next = NULL;
+template <typename T>
+void List<T>::pushEnd(T info) {
+    Node<T>* new_node = new struct Node<T>;
+    new_node->data = info;
     new_node->prev = NULL;
+    new_node->next = NULL;
 
     if (this->front == NULL) {
         this->front = new_node;
-        this->end = this->front;
+        this->end = new_node;
         this->list_size++;
-        cout << this->getEnd()->toString() << " has been pushed to the end." << endl;
+        std::cout << this->getEnd() << " has been pushed to the end." << std::endl;
     } else {
         this->end->next = new_node;
         new_node->prev = this->end;
         this->end = new_node;
         this->list_size++;
-        cout << this->getEnd()->toString() << " has been pushed to the end." << endl;
+        std::cout << this->getEnd() << " has been pushed to the end." << std::endl;
     }
 }
 // Method to add element to the back of the list
 
 template <class T>
-T* List<T>::popFront() {
-    T* temp = this->front;
+void List<T>::popEnd() {
     if (this->front == NULL) {
-        cout << "The List is Empty." << endl;
+        std::cout << "The List is empty." << std::endl;
     } else {
-        this->front = this->front->next;
-        this->list_size--;
-    }
-    return temp;
-}
-// Method to return head element and removing it
-
-template <class T>
-T* List<T>::popEnd() {
-    T* temp = this->end;
-    if (this->front == NULL) {
-        cout << "This List is Empty" << endl;
-    } else {
+        Node<T>* temp = this->end;
         this->end = this->end->prev;
         this->list_size--;
+        std::cout << temp->data << " has been popped from the end." << std::endl;
+        delete temp;
     }
-    return temp;
 }
-// Method to return head element and removing it
+// Method to remove the end of the list
+
+template <class T>
+void List<T>::popFront() {
+    if (this->front == NULL) {
+        std::cout << "The List is empty." << std::endl;
+    } else {
+        Node<T>* temp = this->front;
+        this->front = this->front->next;
+        this->list_size--;
+        std::cout << temp->data << " has been popped from the front." << std::endl;
+        delete temp;
+    }
+    if (this->front != NULL) {
+        this->front->prev = NULL;
+    }
+}
+// Method to remove head of the list
 
 template <class T>
 int List<T>::getNumEntries() {
-    return list_size;
+    return this->list_size;
 }
-// Method to return number of elements in a list
 
 int main() {
-    List<Node<int>> A;
+    List<int> A;
     // Default Constructor
 
     A.popFront();
@@ -186,46 +152,19 @@ int main() {
     cout << endl;
 
     for (int i = 0; i < 5; i++) {
-        A.pushFront(new Node<int>(i));
+        A.pushFront(i);
         cout << "There are " << A.getNumEntries() << " elements in the list A." << endl;
     }
     cout << endl;
 
-    List<Node<int>> B(A);
-    // Copy Constructor
+    List<int> B(A);
     cout << "Number of entries in B: " << B.getNumEntries() << endl;
     cout << endl;
 
-    for (int i = 0; i < 2; i++) {
-        cout << A.popFront()->toString() << " has been removed from the front in A." << endl;
-    }
-    for (int i = 0; i < 2; i++) {
-        cout << A.popEnd()->toString() << " has been removed from the back in A." << endl;
+    List<char> C;
+    for (char c = 'A'; c < 'Z'; c++) {
+        C.pushFront(c);
     }
     cout << endl;
-    cout << "Number of entries in A: " << A.getNumEntries() <<  endl;
-    cout << "Number of entries in B: " << B.getNumEntries() <<  endl;
-    cout << "The first value of A is: " << A.getFront() ->toString() << endl;
-    cout << "The first value of B is: " << B.getFront() ->toString() << endl;
-    cout << endl;
-
-    List<Node<char>> C;
-    for (char c = 'A'; c < 'H'; c++) {
-        C.pushEnd(new Node<char>(c));
-        cout << "There are " << C.getNumEntries() << " elements in the list C." << endl;
-    }
-    cout << endl;
-    cout << "The first element in C is " << C.getFront()->toString() << endl;
-    cout << "The last element in C is " << C.getEnd()->toString() << endl;
-    cout << endl;
-   
-    List<Node<int>> D(5, new Node<int>(23));
-    // Parametric Constructor
-    // If change type here, must change in the constructor above
-    cout << "Number of Entries in D: " << D.getNumEntries() << endl;
-    cout << "The first element in D is " << D.getFront()->toString() << endl;
-    cout << "The last element in D is " << D.getEnd()->toString() << endl;
-    cout << endl;
-    
     return 0;
 }
