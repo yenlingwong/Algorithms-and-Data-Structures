@@ -172,4 +172,4 @@ int main() {
     cout << endl;
     return 0;
 }
-// TA's Comment: delete[] temp works only for arrays not linked list. use delete -0.05, pop push should also deallocate memory -0.05 (fixed)
+// TA's Comment: delete[] temp works only for arrays not linked list. use delete -0.05, pop push should also deallocate memory -0.05 (fixed). Also create all constructors total: 1.9
