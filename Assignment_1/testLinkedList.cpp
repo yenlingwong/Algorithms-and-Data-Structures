@@ -6,7 +6,7 @@ ywong@jacobs-university.de
 */
 
 #include <iostream>
-#include "LinkedList.h"
+#include "a1_p3.h"
 
 using namespace std;
 
@@ -166,5 +166,10 @@ int main() {
         C.pushFront(c);
     }
     cout << endl;
+    cout << "Number of Entries in D: " << C.getNumEntries() << endl;
+    cout << "The first element in D is " << C.getFront() << endl;
+    cout << "The last element in D is " << C.getEnd() << endl;
+    cout << endl;
     return 0;
 }
+// TA's Comment: delete[] temp works only for arrays not linked list. use delete -0.05, pop push should also deallocate memory -0.05 (fixed)
