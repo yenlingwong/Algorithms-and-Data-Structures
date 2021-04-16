@@ -6,43 +6,32 @@ ywong@jacobs-university.de
 */
 
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 template <typename T>
-class Node {
-    private:
-    public:
-        T data;
-        Node* next;
-        Node* prev;
-        // Type Node* because pointer to same class
-        Node(T data);
-        //Node(const Node& node_copy);
-        ~Node();
-        string toString();
-
+struct Node {
+    T data;
+    Node* next;
+    Node* prev;
 };
 
-template <class T> 
+template <typename T> 
 class List {
     private:
-        T* front;
-        T* end;
+        struct Node<T>* front;
+        struct Node<T>* end;
         int list_size;
 
     public:
         List();
-        List(const List<Node<T>>& list_copy);
-        List(int size, T* new_node);
+        List(const List<T>& list_copy);
         ~List();
-        T* getFront();
-        T* getEnd();
-        T* popFront();
-        T* popEnd();
-        void pushFront(T* new_node);
-        void pushEnd(T* new_node);
+        T getFront();
+        T getEnd();
+        void popFront();
+        void popEnd();
+        void pushFront(T info);
+        void pushEnd(T info);
         int getNumEntries();
-
 };
