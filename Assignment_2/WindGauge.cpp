@@ -2,7 +2,7 @@
 CH-231-A
 a2_p3.cpp
 Yen Ling Wong
-ywong@jacobs-university.de
+y.wong@jacobs-university.de
 */
 
 #include <iostream>
