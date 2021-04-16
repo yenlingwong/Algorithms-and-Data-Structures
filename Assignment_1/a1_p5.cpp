@@ -49,11 +49,10 @@ int main() {
     }
     cout << word_vector.at(word_vector.size() - 1) << endl;
 
-    reverse(word_vector.begin(), word_vector.end());
-    for (auto it = word_vector.begin(); it != word_vector.end(); it++) {
+    // reverse(word_vector.begin(), word_vector.end());
+    for (auto it = word_vector.rbegin(); it != word_vector.rend(); it++) {
         cout << *it << " ";
     }
-
     return 0;
 }
-// TA's comments: p5: Great but use reverse iterator next time total : 1 Make sure to comment next time even if its small program
+// TA's comments: p5: Great but use reverse iterator next time (fixed) total : 1 Make sure to comment next time even if its small program
