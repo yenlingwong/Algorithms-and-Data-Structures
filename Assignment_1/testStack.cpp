@@ -144,4 +144,4 @@ int main() {
     }
     return 0;
 }
-// TA's Comments: doesn’t work for custom data types -0.1 total: 1.9
+// TA's Comments: p2: doesn’t work for custom data types -0.1, copy constructor not implemented properly causing pointer issues -0.1 during deallocation. (fixed) total: 1.8
