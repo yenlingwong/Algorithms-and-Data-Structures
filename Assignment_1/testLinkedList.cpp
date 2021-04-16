@@ -49,7 +49,6 @@ List<T>::~List() {
 }
 // Destructor
 
-
 template <typename T>
 T List<T>::getFront() {
     return this->front->data;
@@ -130,9 +129,6 @@ void List<T>::popFront() {
         this->list_size--;
         std::cout << temp->data << " has been popped from the front." << std::endl;
         delete temp;
-    }
-    if (this->front != NULL) {
-        this->front->prev = NULL;
     }
 }
 // Method to remove head of the list
