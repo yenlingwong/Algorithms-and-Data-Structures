@@ -23,7 +23,6 @@ int main() {
         int lot = rand() % 49 + 1;
         auto ret = s.emplace(lot);
         if (ret.second) {
-            s.emplace(lot);
             entry++;
 // add the drawn number to a container that stores all drawn
 // numbers (but make sure that your container will not contain duplicates).
